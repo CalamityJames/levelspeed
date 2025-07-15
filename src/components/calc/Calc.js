@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './calc.css';
 
 import Input from "./Input";
 import Result from "./Result";
@@ -49,67 +48,120 @@ export default class Header extends Component {
         var validData = totalPerc >= 0 && this.props.date !== null
             && this.props.date < (new Date());
 
-        var resultComponents = (<div className="rollDown">
-            <div className="line"></div>
-            ENTER XP AND START DATE<br />
-            TO SEE YOUR RESULTS
-        </div>);
-        if (validData) {
-            resultComponents = (<div className="rollDown opened">
-                <div className="line"></div>
-                <Result startDate={this.props.date} xp={this.props.xp} goal={this.props.goal} />
-                <Visualization perc={totalPerc} goal={this.props.goal} />
-            </div>);
-        }
+        var resultComponents = (
+            <div className="transition-all duration-500 ease-in-out overflow-hidden" style={{maxHeight: validData ? '1000px' : '120px'}}>
+                <div className="border-t border-gray-300 mx-4 my-6"></div>
+                {validData ? (
+                    <div className="space-y-6">
+                        <Result startDate={this.props.date} xp={this.props.xp} goal={this.props.goal} />
+                        <Visualization perc={totalPerc} goal={this.props.goal} />
+                    </div>
+                ) : (
+                    <div className="text-gray-500 text-lg tracking-wide">
+                        ENTER XP AND START DATE<br />
+                        TO SEE YOUR RESULTS
+                    </div>
+                )}
+            </div>
+        );
 
-        var disabledStyle = this.props.xp === '?' ? ' disabled' : '';
-
-        // this is really getting messed up now...
+        var isDisabled = this.props.xp === '?';
 
         return (
-            <div className="calc">
-                <h1>POKEMON GO<br/>LEVEL SPEED CALCULATOR</h1>
-                <div className="xp">
-                    <div className="fakeInput" onClick={()=>{this.input1.focus();}}>
-                        <Input value={this.props.xp} className="inputXp" ref={(c) => {this.input1 = c}}
-                            onChange={(evt) => this.props.setXp(evt.target.value)}
-                        /> XP
-                    </div>
-                </div>
-                <div className={"level"+disabledStyle}>
-                    Level {stats.level}
-                </div>
-                <div className={"progress"+disabledStyle}>
-                    <div className="progressBg"></div>
-                    <div className="progressFront" style={progressStyle}><div className="progressHandle"></div></div>
-                    <div className="progressXp">{stats.xpLeft} / {stats.xpGoal} XP</div>
-                </div>
-                <div className="bottom">
-                    <div className="startDate">
-                        START DATE:<br />
-                        <div className="fakeInput" onClick={()=>{this.input2.focus();}}>
-                            <Input value={this.props.dateStr} className="inputDate" ref={(c) => {this.input2 = c}}
-                                   onChange={(evt) => this.props.setStartDate(evt.target.value)}
-                            />
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+                <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+                    <div className="text-center">
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 leading-tight">
+                            POKEMON GO<br/>
+                            <span className="text-blue-600">LEVEL SPEED CALCULATOR</span>
+                        </h1>
+                        
+                        {/* XP Input Section */}
+                        <div className="mb-8">
+                            <div className="inline-flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl px-6 py-3 cursor-text hover:border-blue-400 transition-colors"
+                                 onClick={()=>{this.input1.focus();}}>
+                                <Input 
+                                    value={this.props.xp} 
+                                    className="bg-transparent text-2xl md:text-3xl font-semibold text-gray-700 outline-none min-w-0 flex-1" 
+                                    ref={(c) => {this.input1 = c}}
+                                    onChange={(evt) => this.props.setXp(evt.target.value)}
+                                />
+                                <span className="text-2xl md:text-3xl font-semibold text-gray-700 ml-2">XP</span>
+                            </div>
+                        </div>
+
+                        {/* Current Level Display */}
+                        <div className={`text-4xl md:text-5xl font-bold mb-6 transition-all duration-300 ${isDisabled ? 'opacity-50 blur-sm' : 'text-blue-600'}`}>
+                            Level {stats.level}
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div className={`mb-8 transition-all duration-300 ${isDisabled ? 'opacity-50 blur-sm' : ''}`}>
+                            <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <div 
+                                    className="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-500 ease-out relative"
+                                    style={progressStyle}
+                                >
+                                    <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-blue-500 rounded-full shadow-lg"></div>
+                                </div>
+                            </div>
+                            <div className="mt-4 bg-gray-100 rounded-xl py-3 px-4">
+                                <div className="text-lg font-medium text-gray-600">
+                                    {stats.xpLeft} / {stats.xpGoal} XP
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Input Section */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            {/* Start Date */}
+                            <div className="space-y-3">
+                                <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                    Start Date
+                                </label>
+                                <div className="bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 cursor-text hover:border-blue-400 transition-colors"
+                                     onClick={()=>{this.input2.focus();}}>
+                                    <Input 
+                                        value={this.props.dateStr} 
+                                        className="bg-transparent text-lg font-semibold text-gray-700 outline-none w-full text-center"
+                                        ref={(c) => {this.input2 = c}}
+                                        onChange={(evt) => this.props.setStartDate(evt.target.value)}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Level Goal */}
+                            <div className="space-y-3">
+                                <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">
+                                    Target Level
+                                </label>
+                                <div className="flex rounded-xl overflow-hidden border-2 border-gray-200">
+                                    {[30, 40, 50].map((level) => (
+                                        <button
+                                            key={level}
+                                            className={`flex-1 py-3 px-4 text-lg font-semibold transition-all duration-200 ${
+                                                this.props.goal === level
+                                                    ? 'bg-blue-600 text-white shadow-lg'
+                                                    : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+                                            }`}
+                                            onClick={() => this.props.setGoal(level)}
+                                        >
+                                            {level}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Results Section */}
+                        {resultComponents}
+
+                        {/* GitHub Link */}
+                        <div className="mt-8 opacity-70">
+                            <Github/>
                         </div>
                     </div>
-                    <div className="startDate levelchoice">
-                        LEVEL:<br />
-                        <div className="btn-group" data-toggle="buttons">
-                            <label className={"btn btn-secondary"+(this.props.goal === 30 ? ' active':'')} onClick={()=>this.props.setGoal(30)}>
-                                <input type="radio" name="options" id="option1" autoComplete="off" defaultChecked={this.props.goal === 30 ? 'checked':''} /> 30
-                            </label>
-                            <label className={"btn btn-secondary"+(this.props.goal === 40 ? ' active':'')} onClick={()=>this.props.setGoal(40)}>
-                                <input type="radio" name="options" id="option2" autoComplete="off" defaultChecked={this.props.goal === 40 ? 'checked':''} /> 40
-                            </label>
-                            <label className={"btn btn-secondary"+(this.props.goal === 50 ? ' active':'')} onClick={()=>this.props.setGoal(50)}>
-                                <input type="radio" name="options" id="option2" autoComplete="off" defaultChecked={this.props.goal === 50 ? 'checked':''} /> 50
-                            </label>
-                        </div>
-                    </div>
                 </div>
-                {resultComponents}
-                <Github/>
             </div>
         );
     }

@@ -37,21 +37,33 @@ export default class Header extends Component {
             var levelStyle = {
                 left : (100 * level.perc) + '%'
             };
-            elems.push(<div className={"xpLabel" + (level.minor?' minor':'')} style={levelStyle} key={level.level}>
-                <span className="text">{level.level}</span>
-            </div>);
+            elems.push(
+                <div 
+                    className={`absolute transform -translate-x-1/2 ${level.minor ? 'opacity-40' : ''}`} 
+                    style={levelStyle} 
+                    key={level.level}
+                >
+                    <div className="w-4 h-4 bg-gray-400 rounded-full"></div>
+                    <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-xs font-bold text-gray-600">
+                        {level.level}
+                    </div>
+                </div>
+            );
         });
         var youStyle = {
             left : (100 * this.props.perc) + '%'
         };
         return (
-            <div className="visualization">
-                <div className="xpProg">
-                    <div className="xpProgBg"></div>
+            <div className="mt-8">
+                <div className="relative h-4 bg-gray-200 rounded-full mx-2">
+                    <div className="absolute inset-0 bg-gray-200 rounded-full"></div>
                     {elems}
-                    <div className="xpLabel you" style={youStyle}></div>
-                    <div className="youBox" style={youStyle}>
-                        <div className="innerBox">YOU</div>
+                    <div className="absolute transform -translate-x-1/2 transition-all duration-300" style={youStyle}>
+                        <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                        <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-3 py-1 rounded-lg text-sm font-bold">
+                            YOU
+                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-red-500"></div>
+                        </div>
                     </div>
                 </div>
             </div>

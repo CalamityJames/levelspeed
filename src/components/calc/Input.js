@@ -67,8 +67,8 @@ export default class Input extends Component {
         };
         return (
             <span>
-                <span className={"testSpan " + this.props.className} ref={(c) => {this.testElem = c}}>{this.props.value}</span>
-                <input type="text" className={"variableSize " + this.props.className}
+                <span className="absolute left-[-1000px] top-[-100000px] pointer-events-none" style={{fontSize: 'inherit', fontFamily: 'inherit', fontWeight: 'inherit'}} ref={(c) => {this.testElem = c}}>{this.props.value}</span>
+                <input type="text" className={this.props.className}
                        value={this.props.value} style={inputStyle}
                        onFocus={this.focussed.bind(this)}
                        ref={(c) => {this.elem = c}} onChange={this.handleChange.bind(this)} />

@@ -8,6 +8,12 @@ import Github from '../Github';
 import levelXp, {totalXp} from './levels';
 var MAX_LEVEL = levelXp.length;
 
+// Utility function to format numbers with commas
+function formatNumber(num) {
+    if (num === '?' || num === '?????') return num;
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 function calcStats(xp) {
 
     
@@ -68,25 +74,25 @@ export default class Header extends Component {
         var isDisabled = this.props.xp === '?';
 
         return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
-                <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-4 md:py-8 px-2 md:px-4">
+                <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-4 md:p-8">
                     <div className="text-center">
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 leading-tight">
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 md:mb-8 leading-tight">
                             POKEMON GO<br/>
                             <span className="text-blue-600">LEVEL SPEED CALCULATOR</span>
                         </h1>
                         
                         {/* XP Input Section */}
-                        <div className="mb-8">
-                            <div className="inline-flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl px-6 py-3 cursor-text hover:border-blue-400 transition-colors"
+                        <div className="mb-8 px-4 md:px-0">
+                            <div className="flex items-center bg-gray-50 border-2 border-gray-200 rounded-xl px-4 md:px-6 py-3 cursor-text hover:border-blue-400 transition-colors w-full max-w-lg mx-auto"
                                  onClick={()=>{this.input1.focus();}}>
                                 <Input 
                                     value={this.props.xp} 
-                                    className="bg-transparent text-2xl md:text-3xl font-semibold text-gray-700 outline-none min-w-0 flex-1" 
+                                    className="bg-transparent text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 outline-none flex-1 text-center min-w-0 overflow-hidden" 
                                     ref={(c) => {this.input1 = c}}
                                     onChange={(evt) => this.props.setXp(evt.target.value)}
                                 />
-                                <span className="text-2xl md:text-3xl font-semibold text-gray-700 ml-2">XP</span>
+                                <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 ml-2 flex-shrink-0">XP</span>
                             </div>
                         </div>
 
@@ -107,7 +113,7 @@ export default class Header extends Component {
                             </div>
                             <div className="mt-4 bg-gray-100 rounded-xl py-3 px-4">
                                 <div className="text-lg font-medium text-gray-600">
-                                    {stats.xpLeft} / {stats.xpGoal} XP
+                                    {formatNumber(stats.xpLeft)} / {formatNumber(stats.xpGoal)} XP
                                 </div>
                             </div>
                         </div>
@@ -119,11 +125,11 @@ export default class Header extends Component {
                                 <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">
                                     Start Date
                                 </label>
-                                <div className="bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 cursor-text hover:border-blue-400 transition-colors"
+                                <div className="bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-3 cursor-text hover:border-blue-400 transition-colors min-w-0"
                                      onClick={()=>{this.input2.focus();}}>
                                     <Input 
                                         value={this.props.dateStr} 
-                                        className="bg-transparent text-lg font-semibold text-gray-700 outline-none w-full text-center"
+                                        className="bg-transparent text-lg font-semibold text-gray-700 outline-none w-full text-center min-w-0"
                                         ref={(c) => {this.input2 = c}}
                                         onChange={(evt) => this.props.setStartDate(evt.target.value)}
                                     />

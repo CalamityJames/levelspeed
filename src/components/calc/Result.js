@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 
 import { totalXp } from './levels';
 
+// Utility function to format numbers with commas
+function formatNumber(num) {
+    if (num === '?' || num === '?????') return num;
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 export default class Header extends Component {
 
     render() {
@@ -24,7 +30,7 @@ export default class Header extends Component {
             var daysUntil50 = Math.ceil(xpTodo / xpPerDay);
 
             if (xpPerDay !== 0) {
-                secondLine = `(OR ${daysUntil50} DAYS)`;
+                secondLine = `(OR ${formatNumber(daysUntil50)} DAYS)`;
             }
             if (daysUntil50 >= 365*20) { // years
                 secondLine = 'SORRY...';
@@ -54,7 +60,7 @@ export default class Header extends Component {
                 }
                 firstLine = `YOU WILL REACH LEVEL ${this.props.goal} IN`;
             } else {
-                resultText = daysUntil50 + ' DAYS';
+                resultText = formatNumber(daysUntil50) + ' DAYS';
                 secondLine = '(KEEP IT UP!)';
                 firstLine = `YOU WILL REACH LEVEL ${this.props.goal} IN`;
             }
@@ -68,7 +74,7 @@ export default class Header extends Component {
             <div className="space-y-4 text-center">
                 <div className="bg-blue-50 rounded-xl p-6">
                     <div className="text-gray-700 mb-2">YOU ARE MAKING:</div>
-                    <div className="text-2xl font-bold text-blue-600">{xpPerDay} XP / DAY</div>
+                    <div className="text-2xl font-bold text-blue-600">{formatNumber(xpPerDay)} XP / DAY</div>
                 </div>
                 
                 <div className="space-y-2">

@@ -19,9 +19,17 @@ export default class Input extends Component {
 
     realUpdateWidth() {
         var width = this.testElem.offsetWidth;
-        if (Math.abs(this.state.width - width) > 2) { // sometimes it seems to be a few pixels off
+        var parentWidth = this.testElem.parentElement ? this.testElem.parentElement.offsetWidth : 0;
+        var targetWidth = Math.max(width + 20, 120); // More padding and higher minimum
+        
+        // If parent has flex-1 class, use available space
+        if (this.testElem.parentElement && this.testElem.parentElement.classList.contains('flex-1')) {
+            targetWidth = Math.max(targetWidth, parentWidth - 100); // Leave space for "XP" label
+        }
+        
+        if (Math.abs(this.state.width - targetWidth) > 2) {
             this.setState({
-                width: width + 1
+                width: targetWidth
             });
         }
     }
@@ -62,9 +70,12 @@ export default class Input extends Component {
     }
 
     render(){
-        var inputStyle = {
+        // For flex-1 inputs, don't constrain width - let it be flexible
+        var hasFlexClass = this.props.className && this.props.className.includes('flex-1');
+        var inputStyle = hasFlexClass ? {} : {
             width : this.state.width
         };
+        
         return (
             <span>
                 <span className="absolute left-[-1000px] top-[-100000px] pointer-events-none" style={{fontSize: 'inherit', fontFamily: 'inherit', fontWeight: 'inherit'}} ref={(c) => {this.testElem = c}}>{this.props.value}</span>

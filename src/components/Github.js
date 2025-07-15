@@ -10,7 +10,7 @@ export default class Github extends Component {
                 <div className="space-y-2">
                     <div>Made with ❤️ for Pokemon Go trainers</div>
                     <div className="text-xs opacity-75">
-                        Fork this project on GitHub to contribute improvements
+                        Based on trainerlevelspeed.de by <a href="https://github.com/thomasdondorf/poke-level-calc" target="_blank">thomasdondorf</a>
                     </div>
                 </div>
             </div>

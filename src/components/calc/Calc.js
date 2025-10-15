@@ -141,11 +141,11 @@ export default class Header extends Component {
                                 <label className="block text-sm font-bold text-gray-700 uppercase tracking-wider">
                                     Target Level
                                 </label>
-                                <div className="flex rounded-xl overflow-hidden border-2 border-gray-200">
-                                    {[30, 40, 50].map((level) => (
+                                <div className="grid grid-cols-3 lg:grid-cols-6 rounded-xl overflow-hidden border-2 border-gray-200">
+                                    {[30, 40, 50, 60, 70, 80].map((level) => (
                                         <button
                                             key={level}
-                                            className={`flex-1 py-3 px-4 text-lg font-semibold transition-all duration-200 ${
+                                            className={`py-3 px-2 text-sm lg:text-lg font-semibold transition-all duration-200 ${
                                                 this.props.goal === level
                                                     ? 'bg-blue-600 text-white shadow-lg'
                                                     : 'bg-gray-50 text-gray-700 hover:bg-gray-100'

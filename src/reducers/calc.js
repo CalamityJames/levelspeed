@@ -9,7 +9,7 @@ if (location.hash && location.hash.length > 0) {
 
 let defaultState = parseDate(query.date || 'dd/mm/2016');
 defaultState.xp = parseXp(query.xp || '?');
-defaultState.goal = parseInt(query.level, 10);
+defaultState.goal = parseInt(query.level, 10) || 40;
 
 function newState(state) {
     var hash = [];

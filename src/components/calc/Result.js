@@ -33,8 +33,8 @@ export default class Header extends Component {
                 secondLine = `(OR ${formatNumber(daysUntil50)} DAYS)`;
             }
             if (daysUntil50 >= 365*20) { // years
-                secondLine = 'SORRY...';
-                firstLine = `YOU WILL NEVER REACH LEVEL ${this.props.goal}`;
+                secondLine = 'Sorry...';
+                firstLine = `You will never reach  ${this.props.goal} 😔`;
             } else if (daysUntil50 >= 340) { // years
                 var years = Math.floor(daysUntil50 / 365);
                 var restMonths = Math.floor((daysUntil50 % 365) / 31);
@@ -43,38 +43,38 @@ export default class Header extends Component {
                     years++;
                 }
                 if (years === 1) {
-                    resultText = '1 YEAR';
+                    resultText = '1 year';
                 } else {
-                    resultText = years + ' YEARS';
+                    resultText = years + ' year';
                 }
                 if (restMonths >= 3 && years <= 2) {
-                    resultText += ', ' + restMonths + ' MONTHS';
+                    resultText += ', ' + restMonths + ' months';
                 }
-                firstLine = `YOU WILL REACH LEVEL ${this.props.goal} IN`;
+                firstLine = `You will reach level ${this.props.goal} in`;
             } else if (daysUntil50 >= 30) { // months
                 var months = Math.ceil(daysUntil50 / 30.5);
                 if (months === 1) {
-                    resultText = '1 MONTH';
+                    resultText = '1 month';
                 } else {
-                    resultText = months + ' MONTHS';
+                    resultText = months + ' month';
                 }
-                firstLine = `YOU WILL REACH LEVEL ${this.props.goal} IN`;
+                firstLine = `You will reach level ${this.props.goal} in`;
             } else {
-                resultText = formatNumber(daysUntil50) + ' DAYS';
-                secondLine = '(KEEP IT UP!)';
-                firstLine = `YOU WILL REACH LEVEL ${this.props.goal} IN`;
+                resultText = formatNumber(daysUntil50) + ' days';
+                secondLine = '(keep it up! 🙌)';
+                firstLine = `YYou will reach level ${this.props.goal} in`;
             }
         } else {
-            firstLine = 'YOU DID IT!';
-            secondLine = 'CONGRATULATIONS 🎉';
+            firstLine = 'You did it!';
+            secondLine = 'Congratulations 🎉';
             isComplete = true;
         }
 
         return (
             <div className="space-y-4 text-center">
                 <div className="bg-blue-50 rounded-xl p-6">
-                    <div className="text-gray-700 mb-2">YOU ARE MAKING:</div>
-                    <div className="text-2xl font-bold text-blue-600">{formatNumber(xpPerDay)} XP / DAY</div>
+                    <div className="text-gray-700 mb-2">You are making:</div>
+                    <div className="text-2xl font-bold text-blue-600">{formatNumber(xpPerDay)} XP / day</div>
                 </div>
                 
                 <div className="space-y-2">
@@ -87,7 +87,7 @@ export default class Header extends Component {
                         </div>
                     )}
                     {secondLine && (
-                        <div className={`text-lg tracking-wide ${isComplete ? 'text-green-600' : secondLine.includes('SORRY') ? 'text-red-600' : 'text-gray-600'}`}>
+                        <div className={`text-lg tracking-wide ${isComplete ? 'text-green-600' : secondLine.includes('Sorry') ? 'text-red-600' : 'text-gray-600'}`}>
                             {secondLine}
                         </div>
                     )}

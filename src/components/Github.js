@@ -11,8 +11,8 @@ export default class Github extends Component {
                     <div>Made with ❤️ for Pokémon Go trainers</div>
                     <div className="text-xs opacity-75">
                         Based on trainerlevelspeed.de by <a href="https://github.com/thomasdondorf/poke-level-calc" target="_blank">thomasdondorf</a>
-                        <br>
-                        <a href="https://github.com/CalamityJames/levelspeed">View on GitHub</a>
+                        <br />
+                        <a href="https://github.com/CalamityJames/levelspeed" target="_blank">View on GitHub</a>
                     </div>
                 </div>
             </div>

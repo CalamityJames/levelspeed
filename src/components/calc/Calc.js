@@ -21,7 +21,9 @@ function calcStats(xp) {
         return {
             level : '?',
             xpLeft : '?????',
-            xpGoal : 176000000
+            xpGoal : 176000000,
+            needsAsterisk : false,
+            showLevelUpNote : false
         };
     }
     var level = 0;
@@ -33,10 +35,17 @@ function calcStats(xp) {
     if (level === 50) {
         xpLeft = levelXp[levelXp.length-1]
     }
+    
+    // Check if level 70+ for asterisk and note
+    var needsAsterisk = level >= 70;
+    var showLevelUpNote = level >= 71;
+    
     return {
         level : level,
         xpLeft : xpLeft,
-        xpGoal : levelXp[level] || levelXp[levelXp.length-1]
+        xpGoal : levelXp[level] || levelXp[levelXp.length-1],
+        needsAsterisk : needsAsterisk,
+        showLevelUpNote : showLevelUpNote
     };
 }
 
@@ -98,8 +107,16 @@ export default class Header extends Component {
 
                         {/* Current Level Display */}
                         <div className={`text-4xl md:text-5xl font-bold mb-6 transition-all duration-300 ${isDisabled ? 'opacity-50 blur-sm' : 'text-blue-600'}`}>
-                            Level {stats.level}
+                            Level {stats.level}{stats.needsAsterisk ? '*' : ''}
                         </div>
+                        
+                        {/* Level-up Requirements Note for 71+ */}
+                        {stats.showLevelUpNote && stats.level !== '?' && (
+                            <div className="mb-4 text-sm text-orange-600 bg-orange-50 border border-orange-200 rounded-lg p-3">
+                                <div className="font-semibold mb-1">⚠️ Level-up Requirements Notice</div>
+                                <div>This tool does not take into account passing the level-up requirements for levels 71-{stats.level - 1}.</div>
+                            </div>
+                        )}
 
                         {/* Progress Bar */}
                         <div className={`mb-8 transition-all duration-300 ${isDisabled ? 'opacity-50 blur-sm' : ''}`}>

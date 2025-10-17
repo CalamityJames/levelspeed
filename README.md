@@ -19,20 +19,6 @@ npm start
 ## Deployment
 
 The app is deployed to GitHub Pages:
-- Main site: https://CalamityJames.github.io/levelspeed/
-- PR Previews: Automatically deployed to `https://CalamityJames.github.io/levelspeed/pr-[number]/`
-
-To deploy manually:
-```bash
-npm run deploy
-```
-
-## PR Preview System
-
-This repository includes an automated PR preview system that:
-- Deploys each PR to a unique URL for testing
-- Updates the preview when new commits are pushed
-- Automatically cleans up preview deployments when PRs are closed
-- Posts preview URLs as comments on PRs
+- Main site: https://trainerlevelspeed.app/
 
 Based on [react-redux-starter-kit](https://github.com/cloudmu/react-redux-starter-kit)

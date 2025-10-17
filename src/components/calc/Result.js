@@ -30,11 +30,11 @@ export default class Header extends Component {
             var daysUntil50 = Math.ceil(xpTodo / xpPerDay);
 
             if (xpPerDay !== 0) {
-                secondLine = `(OR ${formatNumber(daysUntil50)} DAYS)`;
+                secondLine = `(or ${formatNumber(daysUntil50)} days)`;
             }
             if (daysUntil50 >= 365*20) { // years
                 secondLine = 'Sorry...';
-                firstLine = `You will never reach  ${this.props.goal} 😔`;
+                firstLine = `You will never reach level ${this.props.goal} 😔`;
             } else if (daysUntil50 >= 340) { // years
                 var years = Math.floor(daysUntil50 / 365);
                 var restMonths = Math.floor((daysUntil50 % 365) / 31);
@@ -45,7 +45,7 @@ export default class Header extends Component {
                 if (years === 1) {
                     resultText = '1 year';
                 } else {
-                    resultText = years + ' year';
+                    resultText = years + ' years';
                 }
                 if (restMonths >= 3 && years <= 2) {
                     resultText += ', ' + restMonths + ' months';
@@ -56,13 +56,13 @@ export default class Header extends Component {
                 if (months === 1) {
                     resultText = '1 month';
                 } else {
-                    resultText = months + ' month';
+                    resultText = months + ' months';
                 }
                 firstLine = `You will reach level ${this.props.goal} in`;
             } else {
                 resultText = formatNumber(daysUntil50) + ' days';
                 secondLine = '(keep it up! 🙌)';
-                firstLine = `YYou will reach level ${this.props.goal} in`;
+                firstLine = `You will reach level ${this.props.goal} in`;
             }
         } else {
             firstLine = 'You did it!';

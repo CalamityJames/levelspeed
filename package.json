@@ -1,11 +1,11 @@
 {
   "name": "pokemongo-trainer-level",
-  "homepage": "./",
+  "homepage": "https://trainerlevelspeed.app",
   "version": "0.1.0",
   "description": "Pokemon Go Trainer Level Calculator",
   "repository": {
     "type": "git",
-    "url": "https://github.com/theking465/poke-level-calc.git"
+    "url": "https://github.com/CalamityJames/levelspeed"
   },
   "author": "Thomas Dondorf",
   "license": "GPL-3.0+",

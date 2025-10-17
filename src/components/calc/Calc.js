@@ -73,8 +73,8 @@ export default class Header extends Component {
                     </div>
                 ) : (
                     <div className="text-gray-500 text-lg tracking-wide">
-                        ENTER XP AND START DATE<br />
-                        TO SEE YOUR RESULTS
+                        Enter your XP and start date<br />
+                        to see your results
                     </div>
                 )}
             </div>
@@ -87,8 +87,8 @@ export default class Header extends Component {
                 <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-4 md:p-8">
                     <div className="text-center">
                         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-6 md:mb-8 leading-tight">
-                            POKEMON GO<br/>
-                            <span className="text-blue-600">LEVEL SPEED CALCULATOR</span>
+                            Pokémon Go<br/>
+                            <span className="text-blue-600">Level Speed Calculator</span>
                         </h1>
                         
                         {/* XP Input Section */}
